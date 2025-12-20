@@ -1,15 +1,21 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const baseURI = "ipfs://YOUR_BASE_URI/";
-  
-  const AccessPass = await ethers.deployContract("AccessPassNFT", [baseURI]);
-  await AccessPass.waitForDeployment();
+  const AccessPassNFT = await ethers.getContractFactory("AccessPassNFT");
 
-  console.log("Contract deployed at:", await AccessPass.getAddress());
+  const contract = await AccessPassNFT.deploy(
+    "ipfs://YOUR_BASE_URI/"
+  );
+
+  await contract.waitForDeployment();
+
+  console.log(
+    "✅ AccessPassNFT deployed to:",
+    await contract.getAddress()
+  );
 }
 
 main().catch((error) => {
   console.error(error);
-  process.exitCode = 1;
+  process.exit(1);
 });
