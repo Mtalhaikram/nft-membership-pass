@@ -2,11 +2,26 @@
 
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import Image from "next/image";
+import { useAccount } from "wagmi";
+import { useReadContract } from "wagmi";
+import { ACCESS_PASS_ABI, ACCESS_PASS_ADDRESS } from "../src/lib/contract";
 
 export default function Home() {
 
 
   const { openConnectModal } = useConnectModal();
+  const { address, isConnected } = useAccount();
+
+  const { data: hasAccess, isLoading } = useReadContract({
+    address: ACCESS_PASS_ADDRESS,
+    abi: ACCESS_PASS_ABI,
+    functionName: "isHolder",
+    args: address ? [address] : undefined,
+    query: {
+      enabled: Boolean(address),
+    },
+  });
+  
 
 
   return (
@@ -38,11 +53,38 @@ export default function Home() {
             >
               Connect Wallet
             </button>
-
+            
             <button className="px-6 py-3 rounded-xl border border-white/20 hover:bg-white/5 transition">
               Learn More
             </button>
           </div>
+          {/* ACCESS STATUS */}
+            <div className="mt-6">
+              {!isConnected && (
+                <p className="text-yellow-400">
+                  🔌 Connect your wallet to check access
+                </p>
+              )}
+
+              {isConnected && isLoading && (
+                <p className="text-gray-400">
+                  Checking NFT ownership...
+                </p>
+              )}
+
+              {isConnected && hasAccess === false && (
+                <p className="text-red-400">
+                  ❌ No Access — You don’t own the Access Pass NFT
+                </p>
+              )}
+
+              {isConnected && hasAccess === true && (
+                <p className="text-green-400 font-semibold">
+                  ✅ Access Granted — Welcome!
+                </p>
+              )}
+            </div>
+
         </div>
 
         {/* RIGHT VISUAL */}
