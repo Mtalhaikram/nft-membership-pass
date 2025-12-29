@@ -22,7 +22,7 @@ export default function Home() {
     query: {
       enabled: Boolean(address),
     },
-  });
+  }) as { data: boolean | undefined; isLoading: boolean };
 
   const {
     data: hash,
@@ -37,9 +37,9 @@ export default function Home() {
 
 
   return (
-    <div classame="">
+    <div className="">
       {/* min-h-[calc(100vh-72px)] */}
-    <main className="mt-20 flex items-center">
+      <main className="mt-20 flex items-center">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
         {/* LEFT CONTENT */}
@@ -140,18 +140,18 @@ export default function Home() {
       </div>
       
       {!hasAccess && isConnected && (
-  <div className="mt-12 rounded-xl border border-red-500/30 bg-red-500/10 p-6">
-    <p className="text-red-400 font-medium">
-      ❌ You don’t own the Access Pass NFT.
-    </p>
-    <p className="text-gray-400 mt-2">
-      Purchase the NFT to unlock premium content.
-    </p>
-  </div>
-)}
+        <div className="mt-12 rounded-xl border border-red-500/30 bg-red-500/10 p-6">
+          <p className="text-red-400 font-medium">
+            ❌ You don't own the Access Pass NFT.
+          </p>
+          <p className="text-gray-400 mt-2">
+            Purchase the NFT to unlock premium content.
+          </p>
+        </div>
+      )}
 
-    </main>
-{hasAccess && <PremiumContent />}
-</div>
+      </main>
+      {hasAccess && <PremiumContent />}
+    </div>
   );
 }
