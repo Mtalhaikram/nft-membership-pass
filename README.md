@@ -2,6 +2,12 @@
 
 A decentralized Web3 application that uses NFT-based access control to gate premium content. Users must own an "X-Factor Access Pass" NFT to unlock exclusive features and content on the platform.
 
+## 🌐 Live Demo
+
+**🚀 [View Live Application](https://nft-membership-pass-omega.vercel.app/)**
+
+Experience the NFT-gated access control in action! Connect your wallet and check your access status.
+
 ## 🌟 Features
 
 - **NFT-Gated Access**: Only users holding the Access Pass NFT can view premium content
@@ -209,6 +215,11 @@ The Next.js app can be deployed to:
 - **Netlify**
 - **AWS Amplify**
 - Any Node.js hosting service
+
+**✅ Live Deployment:**
+- Production URL: [https://nft-membership-pass-omega.vercel.app/](https://nft-membership-pass-omega.vercel.app/)
+- Platform: Vercel
+- Status: Active
 
 ```bash
 cd access-pass-frontend
